@@ -12,7 +12,7 @@ module.exports ={
             department: req.body.department,
             direction: req.body.direction,
         });
-    
+            
         try {
             await NewUser.save(); // Guardar el nuevo usuario en la base de datos
             res.status(201).json({ message: "Usuario creado con éxito" });

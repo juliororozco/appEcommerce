@@ -1,4 +1,5 @@
 const User = require('../models/User');
+
 module.exports = {
   getUser: async (req, res) => {
     try {
@@ -13,6 +14,7 @@ module.exports = {
       res.status(500).json("Error al obtener el usuario");
     }
   },
+
   deleteUser: async (req, res) => {
     try {
       const deletedUser = await User.findByIdAndDelete(req.user.id);

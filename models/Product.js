@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
+
 const ProductSchema = new mongoose.Schema(
   { 
-    name: { type: String, require: [true,"es requerido este campo"] },
-    category: { type: String, require: [true,"es requerido este campo"] },
-    imageUrl: { type:[], require: [true, "es requerido este campi"] },
-    reference: { type: String, require: [true, "es requerido este campo"] },
-    price: { type: Number, require: [true, "es requerido este campo"] },
-    oldPrice:{ type: Number, require: [true, "es requerido este campo"] },
-    description: { type: String, require: [true, "es requerido este campo"] },
+    name: { type: String, required: [true, "Es requerido este campo"] },
+    category: { type: String, required: [true, "Es requerido este campo"] },
+    imageUrl: { type: [String], required: [true, "Es requerido este campo"] },
+    reference: { type: String, required: [true, "Es requerido este campo"] },
+    price: { type: Number, required: [true, "Es requerido este campo"] },
+    oldPrice: { type: Number, required: [true, "Es requerido este campo"] },
+    description: { type: String, required: [true, "Es requerido este campo"] },
   },
-  { Timestamp: true }
+  { timestamps: true }
 );
+
 module.exports = mongoose.model("Product", ProductSchema);
-[]

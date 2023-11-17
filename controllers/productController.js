@@ -2,19 +2,20 @@ const Product = require("../models/Product");
 module.exports = {
     createProduct: async (req, res) => {
         const newProduct = new Product(req.body);
-        try {
-            await newProduct.save();
-            res.status(200).json("Producto creado exitosamente");
-        } catch (error) {
-            res.status(500).json("Error al crear el producto");
-        }
+            try {
+    await newProduct.save();
+    res.status(200).json("Producto creado exitosamente");
+} catch (error) {
+    res.status(500).json("Error al crear el producto");
+}
+
     },
-    getAllProducts: async (req, res) => {
+        getAllProducts: async (req, res) => {
         try {
             const products = await Product.find().sort({ createdAt: -1 });
             res.status(200).json(products);
         } catch (error) {
-            res.status(400).json("No hay productos");
+            res.status(500).json("No hay productos");
         }
     },
     getProduct: async (req, res) => {

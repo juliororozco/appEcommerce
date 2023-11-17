@@ -5,10 +5,8 @@ module.exports = {
   addCart: async (req, res) => {
     const userId = req.user.id;
     const { cartItem, quantity } = req.body;
-
     try {
       const cart = await Cart.findOne({ userId });
-
       if (cart) {
         const existingProduct = cart.products.find(
           (product) => product.cartItem.toString() === cartItem
@@ -19,7 +17,6 @@ module.exports = {
         } else {
           cart.products.push({ cartItem, quantity: 1 });
         }
-
         await cart.save();
         res.status(200).json("Productos agregados al carrito");
       } else {
@@ -35,9 +32,9 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+
   getCart: async (req, res) => {
     const userId = req.user.id;
-
     try {
       const cart = await Cart.findOne({ userId });
       res.status(200).json(cart);
@@ -47,7 +44,7 @@ module.exports = {
   },
 
   deleteItem: async (req, res) => {
-    const cartItemId = req.params.cartItem; // Corregido de req.paramas.cartItem a req.params.cartItem
+    const cartItemId = req.params.cartItem; 
 
     try {
       const updateCart = await Cart.findOneAndUpdate(
@@ -55,11 +52,9 @@ module.exports = {
         { $pull: { products: { _id: cartItemId } } },
         { new: true }
       );
-
       if (!updateCart) {
         return res.status(404).json({ message: "Item no encontrado" });
       }
-
       res.status(200).json(updateCart);
     } catch (error) {
       res.status(500).json(error);

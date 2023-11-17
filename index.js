@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const dotenv = require("dotenv");
 const connectionDb = require("./connectionDb");
 const productRoute = require('./routes/products');
@@ -10,8 +11,10 @@ const cartRoute = require('./routes/cart')
 const port = 3000
 dotenv.config();
 
+
 app.use(express.json({limit:'10mb'}));
 app.use(express.urlencoded({limit:'10mb', extended:true}));
+app.use(cors());
 app.use('/api/products',productRoute);
 app.use('/api/',authRoute);
 app.use('/api/orders',orderRoute)
